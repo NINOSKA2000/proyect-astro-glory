@@ -1,0 +1,188 @@
+---
+import 'swiper/css';
+import 'swiper/css/pagination';
+import CardList from "../../components/CardList";
+import CardsLayout from '../../layouts/CardsLayout.astro';
+
+const customCards = [
+	{
+		image: "/img/custom-cards/movie-clip-frame.svg",
+		frame:"/img/custom-cards/frame.svg",
+		name: "Celebrity and Occasion",
+		label: "search by",
+		id:"occasion",
+		type: "custom",
+		metrics: {
+			event: "fourth card",
+			tag: "card_4",
+			source: "public"
+		},
+		form: [
+			{
+				type: "text",
+				label: "Celebrity",
+				placeholder: "Emma Watson",
+				name: "celebrity"
+			},
+			{
+				type: "text",
+				label: "Occasion or movie",
+				placeholder: "Oscars",
+				name: "occasion"
+			}
+		]
+	},
+	{
+		frame:"/img/custom-cards/frame-2.svg",
+		name: "Write down whatever you have in your mind",
+		label: "go wild",
+		id:"go-wild",
+		type: "custom",
+		metrics: {
+			event: "fifth card",
+			tag: "card_5",
+			source: "public"
+		},
+		form: [
+			{
+				type: "textarea",
+				label: "GO WILD",
+				placeholder: "Enter your thoughts",
+				name: "thoughts",
+			}
+		]
+	},
+	{
+		frame:"/img/custom-cards/frame-third.svg",
+		name: "Theme and Decade",
+		label: "search by",
+		id:"theme-decade",
+		type: "custom",
+		metrics: {
+			event: "sixth card",
+			tag: "card_6",
+			source: "public"
+		},
+		form: [
+			{
+				type: "text",
+				label: "theme or fashion icon",
+				placeholder: "Twiggy",
+				value: "",
+				name: "theme"
+			},
+			{
+				type: "wheel-picker",
+				label: "Decade",
+				placeholder: "Enter decade",
+				value: "80s",
+				name: "decade",
+				tags: [
+					{ 
+						value: "seventies",
+						label: "Seventies"
+					},
+					{ 
+						value: "eighties",
+						label: "Eighties"
+					},
+					{ 
+						value: "nineties",
+						label: "Nineties"
+					}
+				]
+			}
+		
+		]
+	}
+]
+
+---
+
+<CardsLayout title="Sociate - Dream up your own look">
+	<div class="page-cards__content">
+		<h1 class="page-cards__title">Dream up your own look</h1>
+		<h2 class="page-cards__description">Create your own prompts to start styling your vibe, style, lookbook. </br> Our AI does the work, so you can be creative</h2>
+		<div class="page-cards__cards-list">
+			<CardList client:load transition:persist cards={customCards} />
+		</div>
+		<a href="/cards"
+			class="cmp-button"
+			onclick="dataLayer.push({'event': 'back to main cards', 'tag': 'back_main_cards', 'source': 'public'});"
+			id="btn-custom">
+			<img src="/img/icons/flip-backward-dark.svg" loading="lazy"/>
+			Go Back to Cards
+		</a>
+	</div>
+</CardsLayout>
+
+<style>
+	.page-cards__cards-list {
+		margin: 24px 0;
+		width: 100%;
+	}
+
+	.page-cards__content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		max-width: 1240px;
+		margin: 0 auto;
+	}
+
+	.page-cards__content.hide {
+		display: none;
+	}
+
+	.cmp-button {
+		display: flex;
+		border: 1px solid #180635;
+		padding: 8px 24px;
+		border-radius: 100px;
+		gap: 10px;
+		margin: 24px 0;
+		line-height: 1;
+	}
+
+	.page-cards__title {
+		font-weight: 400;
+		font-size: 30px;
+		line-height: 32px;
+		color: #180635;
+		margin-top: 48px;
+	}
+
+	.page-cards__description {
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 16px;
+		margin-top: 16px;
+		text-align: center;
+		padding: 0 24px;
+	}
+
+	.page-cards__separate {
+		text-align: center;
+		position: relative;
+		padding: 0 16px;
+	}
+
+	.page-cards__separate:before,
+	.page-cards__separate:after {
+		content: "";
+		display: flex;
+		width: 84px;
+		height: 1px;
+		border-top: 1px solid #44444480;
+		top: 50%;
+		position: absolute;
+	}
+
+	.page-cards__separate:before {
+		right: 100%;
+	}
+
+	.page-cards__separate:after {
+		left: 100%;
+	}
+</style>

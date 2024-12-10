@@ -1,0 +1,123 @@
+---
+const bubbles = [
+  {
+    color: 'bg-[#4370FE]',
+    text: 'Dynamic personalisation',
+    position: 'right-1'
+  },
+  {
+    color: 'bg-[#9AEA80]',
+    text: 'Conversational search',
+    position: 'mt-6'
+  },
+  {
+    color: 'bg-[#EC6CFA]',
+    text: 'Real-time trends',
+    position: 'right-14 bottom-5'
+  }
+]
+---
+
+<div class="container m-auto py-12 px-5 xl:py-16" id="conversational">
+  <h2
+    class="font-bold text-4xl mb-8 text-center md:mx-auto md:mb-24 xl:text-5xl max-w-[800px]"
+  >
+    Conversational search, Real-time trends and Dynamic personalisation
+  </h2>
+  <div
+    class="flex flex-col-reverse justify-center m-auto gap-8 xl:flex-row xl:gap-20 xl:items-center"
+  >
+    <div
+      class="relative w-[320px] mt-12 h-[320px] m-auto xl:min-w-[500px] xl:min-h-[500px]"
+    >
+      <p class="float-text absolute text-[#180635] font-bold text-base text-center z-10 xl:text-2xl">Sociate AI</p>
+      { bubbles.map(bubble => (
+        <div
+          class={`${bubble.position} min-w-[180px] w-[180px] min-h-[180px] absolute rounded-full flex items-center justify-center px-12 xl:w-[300px] xl:h-[300px]`}
+        >
+          <span
+            class="text-[#180635] font-bold text-base text-center z-10 xl:text-2xl"
+            >{bubble.text}</span>
+          <div
+            class={`${bubble.color} opacity-50 absolute w-full h-full rounded-full`}
+          >
+          </div>
+        </div>
+        ))
+      }
+    </div>
+
+    <div class="max-w-[800px]">
+      <div class="text-[#481F8B] font-bold mb-5 mt-5 xl:text-3xl">
+        Groundbreaking AI technology, delivered only by Sociate AI
+      </div>
+      <div>
+        <p class="mb-4">
+          Powered by cFIRST (Curious Fashion Intelligent Recommendation Styling
+          Technology) - Sociate's proprietary fashion and styling multi-modal AI
+          combines real-time customer need, evolving tastes and up to the second
+          trends to make magical product recommendations in a constantly
+          changing world.
+        </p>
+        <p>
+          No matter how good or bad your meta data is, you can catch every
+          customer's shopping need. Let your customers search and show you what
+          they want through text and visual prompts and be truly understood, no
+          matter what they're looking for - like an expert AI personal shopper.
+        </p>
+      </div>
+      <a
+            href="https://www.youtube.com/watch?si=6mtP3vujhhznxWVa&v=Bia13oiOcN4&feature=youtu.be"
+            target="_blank"
+            onclick="dataLayer.push({'event': 'Watch video', 'tag': 'video_hewi'});"
+            class="block bg-[#4C43BF] px-10 py-2 text-white rounded-[32px] max-w-[500px] text-center mt-8 cursor-pointer shadow-2xl"
+          >
+            Watch video here
+          </a> 
+    </div>
+  </div>
+</div>
+
+<style>
+  .float-text {
+    transform: translateX(-50%);
+    left: 50%;
+    top: -60px;
+  }
+  .float-text::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 172px;
+    border: 1px solid #180635;
+    z-index: 10;
+  }
+  .float-text::before {
+    content: '';
+    position: absolute;
+    top: 190px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    border: 1px solid #180635;
+    border-radius: 50%;
+    background-color: #180635;
+    z-index: 10;
+  }
+@media screen and (min-width: 1280px){
+  .float-text {
+    top: -80px;
+  }
+  .float-text::after {
+    height: 280px;
+  }
+  .float-text::before {
+    top: 308px;
+  }
+}
+
+</style>

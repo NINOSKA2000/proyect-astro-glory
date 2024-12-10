@@ -1,0 +1,40 @@
+.buttonMaia {
+    border: 1.5px solid #552f9b;
+    background: #552f9b;
+    border-radius: 4px;
+    padding: 10px;
+    color: white;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    font-size: 16px;
+}
+
+.buttonMaia .loading {
+    display: flex;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+    padding: 0;
+    margin: 0;
+    left: 0;
+    right: 0;
+    background: #552f9b;
+    height: 100%;
+    align-items: center;
+}
+
+.outline {
+    color: #552f9b;
+    border: 1px solid #552f9b;
+    background: transparent;
+    font-weight: bold;
+}
+
+.outline .loading {
+    background: white;
+}

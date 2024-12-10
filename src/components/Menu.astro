@@ -1,0 +1,175 @@
+---
+const links = [
+	{
+		href: 'conversational',
+		label: 'Why Sociate',
+	},
+	{
+		href: 'technology',
+		label: 'Technology',
+	},
+	{
+		href: 'case',
+		label: 'Case study',
+	},
+	{
+		href: 'pricing',
+		label: 'Pricing',
+	},
+	{
+		href: 'team',
+		label: 'Team',
+	}
+]
+---
+
+<nav class="relative px-4 py-4 flex justify-between items-center sticky top-0 z-[1000] border-gray-200 bg-[#180635]">
+	<a class="leading-none js-button flex items-center space-x-3 rtl:space-x-reverse" href="#" >
+		<img href="principal" src="/img/logos/sociate_logo_white.svg" class="h-8" alt="" loading="lazy"/>
+	</a>
+	<div class="lg:hidden">
+		<button class="navbar-burger flex items-center text-blue-600 p-3">
+			<svg
+					class="w-5 h-5"
+					aria-hidden="true"
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 17 14"
+				>
+					<path
+						stroke="#FFFFFF"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M1 1h15M1 7h15M1 13h15"></path>
+				</svg>
+		</button>
+	</div>
+	<ul class="hidden lg:flex flex-col font-medium p-4 md:p-0 mt-4 border border-[#180635] rounded-lg bg-[#180635] md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-[#180635]">
+		{ links.map(link => (
+			<li>
+				<a
+					href={link.href}
+					class="js-button block py-1 px-1 text-white rounded hover:bg-gray-100 md:hover:bg-transparent"
+					aria-current="page">
+					{link.label}
+				</a>
+			</li>
+		)) 
+		}
+		<li>
+			<a
+				href="https://app.sociate.ai/login"
+				class="block py-1 px-5 text-[#AEA8FB] rounded-3xl border-[1px] border-[#AEA8FB]"
+				onclick="dataLayer.push({event: 'login', tag: 'login'});"
+				>Login</a
+			>
+		</li>
+		<li>
+			<a
+				href="footer"
+				onclick="dataLayer.push({event: 'Get started', tag: 'get_started'});"
+				class="js-button block py-1 px-7 text-white bg-[#6A8AF0] font-light rounded-3xl border-[1px] border-[#6A8AF0]"
+				>Get started</a
+			>
+		</li>
+	</ul>
+</nav>
+<div class="navbar-menu relative z-[10000] hidden">
+	<nav class="fixed top-0 left-0 bottom-0 flex flex-col w-full py-6 px-6 bg-[#180635] border-r overflow-y-auto">
+		<div class="flex items-center mb-8">
+			<a class="mr-auto text-3xl font-bold leading-none" href="#">
+				<img href="principal" src="/img/logos/sociate_logo.svg" class="h-8" alt="" loading="lazy"/>
+			</a>
+			<button class="navbar-close">
+				<svg class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+				</svg>
+			</button>
+		</div>
+		<div>
+			<ul
+				class="flex flex-col text-lg p-4 md:p-0 mt-4 border border-[#180635] rounded-lg bg-[#180635] md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-[#180635]"
+			>
+				<li>
+					<a
+						href="footer"
+						class="js-button block py-2 px-7 mb-8 text-center text-white bg-[#6A8AF0] font-light rounded-3xl border-[1px] border-[#6A8AF0]"
+						onclick="dataLayer.push({event: 'Get started', tag: 'get_started'});"
+						>Get started</a
+					>
+				</li>
+				{ links.map(link => (
+					<li>
+						<a
+							href={link.href}
+							class="js-button block py-1 px-1 my-2 text-white rounded md:hover:bg-transparent"
+							aria-current="page">
+							{link.label}
+						</a>
+					</li>
+				)) 
+				}
+				<li>
+					<a
+						href="https://app.sociate.ai/login"
+						onclick="dataLayer.push({event: 'login', tag: 'login'});"
+						class="block py-1 px-1 my-2 text-white rounded md:hover:bg-transparent"
+						>Login</a
+					>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const burger = document.querySelectorAll('.navbar-burger');
+		const menu = document.querySelectorAll('.navbar-menu');
+
+		if (burger.length && menu.length) {
+			for (let i = 0; i < burger.length; i++) {
+				burger[i].addEventListener('click', function() {
+					for (let j = 0; j < menu.length; j++) {
+						menu[j].classList.remove('hidden');
+					}
+				});
+			}
+		}
+		const close = document.querySelectorAll('.navbar-close');
+		
+		if (close.length) {
+			for (let i = 0; i < close.length; i++) {
+				close[i].addEventListener('click', function() {
+					for (let j = 0; j < menu.length; j++) {
+						menu[j].classList.add('hidden');
+					}
+				});
+			}
+		}
+		function scrollToSection(sectionId) {
+			const section = document.getElementById(sectionId);
+
+			if (section) {
+				const sectionTop = section.offsetTop;
+				window.scrollTo({
+					top: sectionTop - 50,
+					behavior: "smooth",
+				});
+			}
+		}
+		const buttons = document.querySelectorAll(".js-button");
+
+		buttons.forEach(function (button) {
+			button.addEventListener("click", function (event) {
+				event.preventDefault();
+				const enlace = event.target as HTMLAnchorElement;
+				const hrefValue = enlace.getAttribute("href");
+				menu.forEach(e => e.classList.add('hidden'));
+				scrollToSection(hrefValue);
+			});
+		});
+	});
+
+</script>

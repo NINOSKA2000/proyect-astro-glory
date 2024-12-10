@@ -1,0 +1,86 @@
+---
+const team = [
+  {
+    name: 'Yasmin Topia',
+    role: 'CEO & Co-founder',
+    linkedin: 'https://www.linkedin.com/in/yasmintopia/',
+    bio: 'Serial AI entrepreneur and founding partner of Post Urban Ventures. Commercial lead PWC, and Adecco. Won and delivered £40m+ in public sector contracts. University of Birmingham',
+    img: '/img/team/yasmin.webp'
+  },
+  {
+    name: 'Luke Robinson',
+    role: 'CSO & Co-founder',
+    linkedin: 'https://www.linkedin.com/in/drlukerobinson/',
+    bio: 'PhD in Quantum Computing from Cambridge. Research fellow at Oxford. World leading AI/ML Partner at Post Urban Ventures, CSO Hazy, LGN',
+    img: '/img/team/luke.webp'
+  },
+  {
+    name: 'Stealth (TBA)',
+    role: 'CTO & Co-founder',
+    bio: 'PhD in AI and ML. Serial AI entrepreneur and market leading CTO, with world leading specialism in ecommerce and advertising AI, working with Facebook, Tiktok and more.',
+    img: '/img/team/stealth.webp'
+  },
+  {
+    name: 'Claudia Davila Rios',
+    role: 'CPO & Co-founder',
+    linkedin: 'https://www.linkedin.com/in/claudavilarios/',
+    bio: 'Conversational AI and Applied AI Visionary, Enterprise Bot Expert, SingularityU Exponential leader Computer Programming Fellow 42 US Silicon Valley. BSc in Economics and Finance.',
+    img: '/img/team/claudia.webp'
+  },
+  {
+    name: 'Brandon Holly',
+    role: 'Fashion Advisor',
+    linkedin: 'https://www.linkedin.com/in/brandonholley1/',
+    bio: 'CEO of Everywear, Shoptrue, Fashion AI pioneer, Ecommerce Expert, Conde-Nast, Chief Editor - Lucky, Yahoo',
+    img: '/img/team/brandon.webp'
+  },
+  {
+    name: 'Richard Kestenbaum',
+    role: 'Ecommerce Industry Advisor',
+    linkedin: 'https://www.linkedin.com/in/rkestenbaum/',
+    bio: 'Partner at Triangle LLC M&A Expert, Ecommerce, Fashion, Retail, Forbes Contributer Harvard and NYC Stern',
+    img: '/img/team/richard.webp'
+  }
+]
+
+---
+
+<div class="container m-auto py-12 xl:py-16" id="team">
+  <h2 class="font-bold text-4xl mb-8 text-center md:mb-16 xl:text-5xl">Team</h2>
+  <div
+    class="flex flex-col justify-center items-center px-8 gap-6 md:flex-row md:flex-wrap md:gap-10"
+  >
+    { team.map((member) => (
+      <div class="flex flex-col max-w-[400px]">
+        <picture>
+          <source srcset={member.img} media="(min-width: 1080px)" />
+          <img
+            class="rounded-full h-[250px] w-[250px] m-auto lg:rounded-[200px] lg:h-[245px] lg:w-[400px] xl:h-[245px] xl:overflow-hidden object-cover xl:rounded-[200px]"
+            src={member.img}
+            class=""
+            alt=""
+            loading="lazy"
+          />
+        </picture>
+        <h3 class="font-bold text-2xl text-left mt-4">{member.name}</h3>
+        <div class="tracking-wide text-left">{member.role}</div>
+        { member.linkedin && (
+          <div class="flex gap-2 mt-2 mb-4">
+            <img src="/img/linkedin.png" class="" alt="" loading="lazy"/>
+            <span>{member.linkedin}</span>
+          </div>
+        )}
+        <div>
+          {member.bio}
+        </div>
+      </div>
+    ))}
+  </div>
+  <a
+    href="footer"
+    class="js-button block bg-[#4C43BF] px-10 py-5 text-white rounded-[32px] max-w-[300px] text-center m-auto mt-8 cursor-pointer"
+    onclick="dataLayer.push({event: 'Get in touch', tag: 'get_in_touch'});"
+  >
+    Get in touch
+  </a>
+</div>

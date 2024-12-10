@@ -1,0 +1,76 @@
+---
+const uses = [
+  {
+    title: 'Visual AI',
+    description: 'Understand what your customers show it',
+    color: 'bg-[#8B51D5]',
+    image: '/img/easy/visual.webp'
+  },
+  {
+    title: 'Conversational AI',
+    description: 'Understand what your customers tell it',
+    color: 'bg-[#645BDE]',
+    image: '/img/easy/conversational.webp'
+  },
+  {
+    title: 'Consultative AI',
+    description: 'Continually learns from your customers and the real world',
+    color: 'bg-[#8B51D5]',
+    image: '/img/easy/consultative.webp'
+  }
+]
+---
+
+<div class="container m-auto py-12 px-10 xl:py-16" id="technology">
+  <h2 class="font-bold text-4xl mb-8 text-center md:mb-16 xl:text-5xl">
+    Easy to Plug & Play
+  </h2>
+  <div
+    class="flex flex-col justify-center m-auto gap-8 xl:flex-row xl:gap-20 xl:items-center"
+  >
+    <div>
+      <div class="text-[#481F8B] font-bold mb-5 mt-5 xl:text-3xl">
+        For both your customers and your team
+      </div>
+      <div class="tracking-wide text-[#242C45]">
+        With no need to replace or disrupt your existing stack, our AI sits on
+        top of your search to fill in the gaps in your metadata in real-time,
+        instantly super powering your on-site search.
+        Our automated social trends tagging surfaces the right products on Google,
+        the moment customers are inspired to search for them.
+        <div class="tracking-wide text-[#242C45]">
+          Customers can use it for conversational search and discovery.
+        </div>
+        <div class="tracking-wide text-[#242C45]">
+          Your team can use it for:  
+        </div>
+        <ul class="list-disc pl-9 mt-2 mb-2">
+          <li>visual merchandising</li>
+          <li>inventory search</li>
+          <li>automated trend tagging</li>
+        </ul>
+         See for yourself what Sociate's AI can do for your inventory. Just upload your product inventory feed to test and compare with your existing search.
+        <a
+          href="footer"
+          onclick="dataLayer.push({event: 'Free trial', tag: 'free_trial'});"
+          class="js-button block bg-[#4C43BF] px-10 py-2 text-white rounded-[32px] max-w-[500px] text-center mt-8 cursor-pointer shadow-2xl"
+        >
+          Get your free trial with your inventory today
+        </a>
+      </div>
+    </div>
+    <div class="flex flex-col gap-8 md:flex-row md:justify-center">
+      { uses.map((use) => (
+        <div
+          class={`${use.color} rounded-full p-2 flex flex-col pb-10 md:min-w-[200px] text-white shadow-2xl lg:max-w-[265px] xl:min-w-[240px]`}
+        >
+          <img class="lg:min-w-[220px]" src={use.image} alt="" loading="lazy" />
+          <div class="mt-20 mb-20 text-center">
+            <div class="text-2xl font-bold">{use.title}</div>
+            <div class="font-light mt-2">{use.description}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>

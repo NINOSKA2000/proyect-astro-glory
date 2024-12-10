@@ -1,0 +1,35 @@
+.cmp-input-text-area {
+  width: 92%;
+  box-sizing: border-box;
+  position: relative;
+  margin-top: 20px;
+}
+
+.cmp-input-text-area label {
+  position: absolute;
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 500;
+  letter-spacing: 1.5;
+  color: #76647f;
+  text-transform: uppercase;
+  margin: 0;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+
+.cmp-input-text-area textarea {
+  width: 100%;
+  padding: 20px 16px 6px;
+  border-bottom: 1px solid #76647f;
+  outline: none;
+  color: #3A214E; 
+  text-align: center;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 100%;
+  resize: none;
+  height: 84px;
+}

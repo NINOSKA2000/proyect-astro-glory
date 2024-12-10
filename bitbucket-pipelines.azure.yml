@@ -1,0 +1,47 @@
+image: node:20
+
+pipelines:
+  custom:
+    pre-process:
+      - step:
+          name: Build and Test
+          caches:
+            - node
+          script:
+            - npm install
+            - apt update && apt install zip
+            - npm run build
+            - cd dist
+            # Exclude files to be ignored
+            - zip -r ../app-$BITBUCKET_BUILD_NUMBER.zip . -x *.git* bitbucket-pipelines.yml
+          artifacts:
+            - "app-*.zip"
+      - step:
+          name: Security Scan
+          script:
+            # Run a security scan for sensitive data.
+            # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
+            - pipe: atlassian/git-secrets-scan:0.5.1
+      - step:
+          name: Deploy Application Settings to web App
+          deployment: Development
+          script:
+            - pipe: microsoft/azure-cli-run:1.1.0
+              variables:
+                AZURE_APP_ID: $AZURE_APP_ID
+                AZURE_PASSWORD: $AZURE_PASSWORD
+                AZURE_TENANT_ID: $AZURE_TENANT_ID
+                CLI_COMMAND: 'az webapp config appsettings set --resource-group $AZURE_RESOURCE_GROUP --name $AZURE_APP_NAME --settings "PUBLIC_HEWI_BASE_ENDPOINT=$PUBLIC_HEWI_BASE_ENDPOINT" "PUBLIC_HEWI_LOGIN=$PUBLIC_HEWI_LOGIN" "PUBLIC_HEWI_PASSWORD=$PUBLIC_HEWI_PASSWORD" "PUBLIC_HEWI_SEARCH=$PUBLIC_HEWI_SEARCH" "PUBLIC_HEWI_USERNAME=$PUBLIC_HEWI_USERNAME"'
+
+      - step:
+          name: Deploy to Web App
+          deployment: Production
+          script:
+            - pipe: atlassian/azure-web-apps-deploy:1.0.1
+              variables:
+                AZURE_APP_NAME: $AZURE_APP_NAME
+                AZURE_APP_ID: $AZURE_APP_ID
+                AZURE_PASSWORD: $AZURE_PASSWORD
+                AZURE_TENANT_ID: $AZURE_TENANT_ID
+                AZURE_RESOURCE_GROUP: $AZURE_RESOURCE_GROUP
+                ZIP_FILE: app-$BITBUCKET_BUILD_NUMBER.zip

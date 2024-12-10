@@ -1,0 +1,136 @@
+---
+import 'swiper/css';
+import 'swiper/css/pagination';
+import CardList from "../../components/CardList";
+import CardsLayout from "../../layouts/CardsLayout.astro";
+
+const cards = [
+	{
+		image:"/img/cards/alexachung.jpeg",
+		name: "Alexa Chung Weekend",
+		label: "CELEBRITY STYLE ICON",
+		id:"celebrity",
+		frame: "/img/cards/frame.svg",
+		metrics: {
+			event: "first card",
+			tag: "card_1",
+			subtag: "alexa_chung",
+			source: "public"
+		}
+	}, {
+		image:"/img/cards/mobwife.jpeg",
+		name: "Mob Wife",
+		label: "INSTA TREND",
+		id:"mob",
+		frame: "/img/cards/frame.svg",
+		metrics: {
+			event: "second card",
+			tag: "card_2",
+			subtag: "mob_wife",
+			source: "public"
+		}
+	}, {
+		image:"/img/cards/french_girl_chic.jpeg",
+		name: "French Girl Chic",
+		label: "GO-TO CLASSIC",
+		id:"classic",
+		frame: "/img/cards/frame.svg",
+		metrics: {
+			event: "third card",
+			tag: "card_3",
+			subtag: "french_girl_chic",
+			source: "public"
+		}
+	}
+]
+
+---
+
+<CardsLayout title="Sociate - DreamPicks">
+	<div class="page-cards__content">
+		<h1 class="page-cards__title">What's your style inspo?</h1>
+		<h2 class="page-cards__description">Select your mood today and discover outfits</h2>
+		<div class="page-cards__cards-list">
+			<CardList client:load cards={cards} />
+		</div>
+		<p class="page-cards__separate">or</p>
+		<a href="/dream-up"
+			class="cmp-button"
+			onclick="dataLayer.push({'event': 'dream up', 'tag': 'dream_up', 'source': 'public'});"
+			id="btn-default">
+			<img src="/img/icons/refresh.svg" loading="lazy"/>
+			Dream up your own look
+		</a>
+	</div>
+</CardsLayout>	
+
+<style>
+	.page-cards__cards-list {
+		margin: 24px 0;
+		width: 100%;
+	}
+
+	.page-cards__content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		max-width: 1240px;
+		margin: 0 auto;
+	}
+
+	.page-cards__content.hide {
+		display: none;
+	}
+
+	.cmp-button {
+		display: flex;
+		border: 1px solid #180635;
+		padding: 8px 24px;
+		border-radius: 100px;
+		gap: 10px;
+		margin: 24px 0;
+		line-height: 1;
+	}
+
+	.page-cards__title {
+		font-weight: 400;
+		font-size: 30px;
+		line-height: 32px;
+		color: #180635;
+		margin-top: 48px;
+	}
+
+	.page-cards__description {
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 16px;
+		margin-top: 16px;
+		text-align: center;
+		padding: 0 24px;
+	}
+
+	.page-cards__separate {
+		text-align: center;
+		position: relative;
+		padding: 0 16px;
+	}
+
+	.page-cards__separate:before,
+	.page-cards__separate:after {
+		content: "";
+		display: flex;
+		width: 84px;
+		height: 1px;
+		border-top: 1px solid #44444480;
+		top: 50%;
+		position: absolute;
+	}
+
+	.page-cards__separate:before {
+		right: 100%;
+	}
+
+	.page-cards__separate:after {
+		left: 100%;
+	}
+</style>

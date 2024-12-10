@@ -1,0 +1,150 @@
+---
+import { ViewTransitions, fade } from "astro:transitions";
+
+const { title, visibleHeader = true, visibleOption = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<link
+			rel="icon"
+			type="image/svg+xml"
+			href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAM1BMVEUeKDJSW2STmqPHzdXh5u7u8/vU2eK6wMlsdH04QUuGjZcrNT+gp69FTlh5gIpfaHGts7wQ/xWfAAAAqUlEQVR4Ac3SRwKEIAwF0FASern/ZceuyZgD+DZKhw/wMcY6j0ghJr2Z8JbhLSPnyms8Shb+0DmyhvMvgdBwQ+1ZrIMw+N789l9BiHxhE1dDm0HOKxSPO5q9garjzc8BCosMaWFHQiaCwlT3rJNAVYwlNeu0KXy/BIJIweFGuSsHh6B0qLiZ6bkspz+HMOeZaQUpIKccs5Bsf6ddeNahgSLF6RCRnDXwLQvaJAfNkqGCIAAAAABJRU5ErkJggg=="
+		/>
+		<ViewTransitions />
+		<!-- Google Tag Manager -->
+		<script>
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push({
+					"gtm.start": new Date().getTime(),
+					event: "gtm.js",
+				});
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != "dataLayer" ? "&l=" + l : "";
+				j.async = true;
+				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, "script", "dataLayer", "GTM-PKFGX6HV");
+		</script>
+		<!-- End Google Tag Manager -->
+	</head>
+	<body>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript
+			><iframe
+				src="https://www.googletagmanager.com/ns.html?id=GTM-PKFGX6HV"
+				height="0"
+				width="0"
+				style="display:none;visibility:hidden"></iframe></noscript
+		>
+		<!-- End Google Tag Manager (noscript) -->
+		{
+			visibleHeader && (
+				<header>
+					<p class="cmp-header__secondary-logo">DreamPicks</p>
+					{visibleOption && (
+						<div class="cmp-header__options">
+							<a href="/search" class="cmp-header__options-item ">
+								Bubbles
+							</a>
+							<div class="cmp-header__options-item selected">Cards</div>
+						</div>
+					)}
+					<a href="/" class="cmp-header__main-logo">
+						by <img src="/img/logos/sociate_logo.svg" loading="lazy"/>
+					</a>
+				</header>
+			)
+		}
+		<slot />
+		<style>
+			body {
+				background: conic-gradient(
+					from 180deg at 50% 50%,
+					#c1fcfb 0deg,
+					#e8f3fb 97.2deg,
+					#fef5fe 210.6deg,
+					#f1e1fa 286.2deg,
+					#c1fcfb 360deg
+				);
+				background-repeat: no-repeat;
+				background-size: cover;
+				background-attachment: fixed;
+			}
+
+			header {
+				max-width: 1240px;
+				margin: 0 auto;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				padding: 24px 16px;
+				gap: 8px;
+                position: relative;
+			}
+
+			.cmp-header__secondary-logo {
+				font-weight: 700;
+				font-size: 20px;
+				line-height: 22px;
+				color: #000000;
+			}
+
+			.cmp-header__main-logo {
+				font-weight: 700;
+				font-size: 14px;
+				line-height: 20px;
+				color: #909090;
+				gap: 8px;
+				display: flex;
+			}
+
+			.cmp-header__sociate-logo {
+				color: #180635;
+				font-size: 20px;
+			}
+
+			@media screen and (min-width: 768px) {
+				header {
+					justify-content: space-between;
+				}
+			}
+
+			.cmp-header__options {
+				display: flex;
+				align-items: center;
+				gap: 50px;
+				flex-grow: 1;
+				justify-content: center;
+			}
+
+			.cmp-header__options-item {
+				padding: 10px;
+				cursor: pointer;
+			}
+
+			.cmp-header__options-item.selected {
+				padding: 10px;
+				border-bottom: 3px solid #ab7df5;
+			}
+
+			@media (max-width: 532px) {
+			    .cmp-header__options {
+			        position: absolute;
+			        top: 100%;
+			    }
+			    header {
+			        margin-bottom: 48px;
+			    }
+			}
+
+		</style>
+	</body>
+</html>

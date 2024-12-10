@@ -1,0 +1,67 @@
+---
+const products = [
+	{
+		title: 'Base',
+		price: '£500',
+		description: 'For most businesses that want to optimise search queries.',
+		period: 'month',
+		features: [
+				'All limited links'
+		]
+	},
+	{
+		title: 'Pro',
+		price: '£3000',
+		description: 'For most large businesses that want to optimise search queries.',
+		period: 'month',
+		features: [
+				'All limited links'
+		],
+		highlight: true,
+	},
+	{
+		title: 'Enterprise',
+		price: 'Quote on request',
+		description: 'Sociate can customise your technology solution to meet your specific needs',
+		features: []
+	}
+]
+---
+
+<div class="container m-auto py-12 px-10 xl:py-16" id="pricing">
+	<h2 class="font-bold text-4xl mb-8 text-center md:mb-16 xl:text-5xl">
+			Product pricing
+	</h2>
+	<div class="flex flex-col justify-center items-center m-auto gap-8 lg:flex-row xl:gap-16 xl:items-stretch">
+		{ products.map(product => (
+			<div class={`flex flex-col shadow-2xl p-5 rounded-[30px] max-w-[400px]${product.highlight ? ' bg-[#481F8B] text-white' : ''}`} >
+				<div>
+					<span class="text-4xl font-bold">
+							{product.price}
+					</span>
+					{ product.period && (
+							<span class={`${product.highlight ? '' : 'text-[#481F8B]'} tracking-widest`}>
+									/{product.period}
+							</span>
+					)}
+				</div>
+				<div class="font-bold mt-4 mb-4 text-xl">
+						{product.title}
+				</div>
+				<div>
+						{product.description}
+				</div>
+				{ product.features.length > 0 && (
+					<div class="flex gap-2 mt-6">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" fill={`${product.highlight ? 'white' : "#180635"}`}/>
+						</svg>
+						<span class={`${product.highlight ? '' : 'text-[#481F8B]'} font-bold`}>
+							All limited links
+						</span>
+					</div>
+				)}
+			</div>
+		))}
+	</div>
+</div>

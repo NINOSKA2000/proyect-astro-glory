@@ -1,0 +1,140 @@
+<script>
+import { getEmailDomain, setGTMEvent } from "../utils/helpers";
+
+  const el = document.getElementById("form");
+  const email = document.querySelector(".js-email") as HTMLInputElement;
+  const response = document.getElementById("response") as HTMLDivElement;
+  const formBody = document.getElementById("form-body") as HTMLDivElement;
+  const error = document.getElementById("error") as HTMLDivElement;
+  el.addEventListener(
+    "click",
+    function (e) {
+      e.preventDefault()
+      if (email.value === ""){
+        error.innerHTML = "Please enter your email";
+        return;
+      }
+      if (!validateEmail(email.value)) {
+        error.innerHTML = "Please enter a valid email";
+        return;
+      }
+      setGTMEvent({
+        event: 'request demo', 
+        tag: 'request_demo',
+        subtag: getEmailDomain(email.value)
+      });
+      enviarFormulario();
+    },
+    false
+  );
+  function validateEmail(email: string) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  }
+  // Obtener referencia al formulario
+  function enviarFormulario() {
+    var xhr = new XMLHttpRequest();
+
+    // Configurar la solicitud: Método POST, URL de la API
+    xhr.open(
+      "POST",
+      "https://webflow.com/api/v1/form/5fd770a6c7dc601db0c55667",
+      true
+    );
+
+    // Configurar el tipo de contenido para la solicitud POST (application/json en este caso)
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    // Configurar el manejo de eventos para cuando la solicitud esté completada
+    xhr.onload = function () {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        // La solicitud fue exitosa
+        //window.location.href = "https://www.sociate.ai/";
+        formBody.style.display = "none";
+        response.innerHTML = "Excellent. You are one step closer to changing your shopping experience. We’ll contact you as soon as we can!";
+      } else {
+        // La solicitud falló
+        formBody.style.display = "none";
+        response.innerHTML = "We couldn’t quite catch that. Would you please try your email again?";
+        console.error("Error en la solicitud:", xhr.status, xhr.statusText);
+      }
+    };
+
+    // Configurar el manejo de eventos para errores de red
+    xhr.onerror = function () {
+      console.error("Error de red");
+    };
+    // Datos que se enviarán en la solicitud POST (en este caso, un objeto JSON)
+    var datos = {
+      name: "Request Demo",
+      pageId: "5fd770a6c7dc601c22c55668",
+      elementId: "23d4308d-b3c1-578d-f469-e5d331f943dc",
+      source: "https://www.sociate.ai/",
+      test: false,
+      fields: {
+        Email: email.value,
+      },
+      dolphin: false,
+    };
+
+    // Convertir el objeto JSON a una cadena antes de enviarlo
+    var datosJSON = JSON.stringify(datos);
+
+    // Enviar la solicitud con los datos JSON
+    xhr.send(datosJSON);
+  }
+</script>
+<footer class="bg-[#180635] text-white p-10" id="footer">
+  <div class="border-b-2 border-[#6b8af033] pb-10">
+    <form class="max-w-screen-xl m-auto">
+      <h3 class="text-4xl text-center mb-6">Ready to get started?</h3>
+      <div id="form-body">
+        <p class="max-w-[800px] m-auto text-[#F0F0F0] text-center mb-5">
+          Submit your email for access and we will be in touch soon!
+        </p>
+        <div class="max-w-[500px] m-auto">
+          <input
+            class="js-email px-2 py-3 w-full bg-transparent border-b-[#481F8B] border-solid border-b-2"
+            placeholder="Your email"
+            type="email"
+          />
+          <span class="text-red-500 text-xs italic" id="error"></span>
+        </div>
+        <div class="m-auto text-center pt-10">
+          <button
+            id="form"
+            type="button"
+            class="m-auto bg-[#4C43BF] px-10 py-2 rounded-3xl"
+            >Request Demo</button
+          >
+        </div>
+      </div>
+      <div class="text-center mt-5" id="response">
+      </div>
+    </form>
+  </div>
+  <div class="max-w-screen-xl m-auto pt-10">
+    <div class="flex justify-between items-center">
+      <div class="flex flex-col justify-between">
+        <img
+          class="w-fit animate-fade-right"
+          src="/img/logos/logo-blanco.png"
+          alt=""
+          loading="lazy"
+        />
+        <div class="mt-20">© Sociate AI Limited. 2024</div>
+      </div>
+      <div>
+        <div class="text-2xl mb-7">Get in touch</div>
+        <ul>
+          <li>Sociate AI Limited</li>
+          <li>68 High Street, Amersham, HP7 0DS</li>
+          <li>@sociateai - twitter</li>
+          <li>@sociateai - instagram</li>
+
+          <li class="mt-7">Email: hello@sociate.ai</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

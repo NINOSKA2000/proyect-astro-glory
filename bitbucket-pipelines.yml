@@ -1,0 +1,56 @@
+image: alpine:3.19
+
+definitions:
+    
+  commonItems: &commonScript
+    apk add --no-cache curl make bash unzip git aws-cli &&
+    aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID &&
+    aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY &&
+    curl -LO https://releases.hashicorp.com/terraform/1.7.5/terraform_1.7.5_linux_amd64.zip &&
+    unzip terraform_1.7.5_linux_amd64.zip -d /usr/local/bin &&
+    rm terraform_1.7.5_linux_amd64.zip &&
+    aws --version &&
+    make --version &&
+    terraform version
+
+pipelines:
+  pull-requests:
+    '**':
+      - step:
+          name: "Pull Request Pipeline"
+          script:
+            - echo "Building PR"
+
+  branches:
+    main:
+      - step:
+          name: "Install & Build"
+          image: node:18-alpine
+          script:
+            - echo "PUBLIC_HEWI_ENDPOINT=$PUBLIC_HEWI_ENDPOINT" >> .env
+            - echo "PUBLIC_HEWI_LOGIN=$PUBLIC_HEWI_LOGIN" >> .env
+            - echo "PUBLIC_HEWI_SEARCH=$PUBLIC_HEWI_SEARCH" >> .env
+            - echo "PUBLIC_HEWI_USERNAME=$PUBLIC_HEWI_USERNAME" >> .env
+            - echo "PUBLIC_HEWI_PASSWORD=$PUBLIC_HEWI_PASSWORD" >> .env
+            - echo "PUBLIC_AES_KEY=$PUBLIC_AES_KEY" >> .env
+            - echo "PUBLIC_IV_KEY=$PUBLIC_IV_KEY" >> .env
+            - npm install -d
+            - npm run build
+          artifacts: 
+            - dist
+            - dist/**
+      - step:
+          name: "Deploy Terraform"
+          script:
+            - *commonScript
+            - export TAG_DEPLOY=$(echo "$BITBUCKET_PIPELINE_UUID" | tr -d '{}')
+            - export ENV=prod
+            - export DEPLOY_REGION=eu-west-2
+            - make deploy
+
+    feature/*: # Example: Run this pipeline for any push to branches with names starting with 'feature/'
+      - step:
+          name: "Feature Branch Pipeline"
+          script:
+            - echo "Building feature branch"
+            # Add specific scripts for feature branches if needed

@@ -1,0 +1,79 @@
+---
+import Menu from "../components/Menu.astro";
+import Team from "../components/Team.astro";
+import Investors from "../components/Investors.astro";
+import Feature from "../components/Feature.astro";
+import Product from "../components/Product.astro";
+import Case from "../components/Case.astro";
+import Technology from "../components/Technology.astro";
+import Easy from "../components/Easy.astro";
+import Conversational from "../components/Conversational.astro";
+import Footer from "../components/Footer.astro";
+import Hero from "../components/Hero.astro";
+
+export const prerender = true;
+const title = "Sociate AI";
+const description = "Generative AI Personal Shoppers That See and Speak.";
+const image = "https://sociate.ai/img/logos/og-logo.png";
+const url = "https://sociate.ai/";
+
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="https://sociate.ai/img/logos/sociate-logo.png" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Sociate - Generative AI Personal Shoppers That See and Speak</title>
+     <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-PKFGX6HV');</script>
+    <!-- End Google Tag Manager --> 
+    {/* Open Graph */}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={url} />
+    <meta property="og:type" content="website" />
+
+    {/* Twitter Card */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PKFGX6HV"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <Menu />
+    <div class="bg-[url('/img/fondo1.webp')] bg-cover" id="principal">
+      <Hero />
+      <div class="w-[300px] h-[1px] bg-[#6A8AF0] m-auto mt-20 mb-4"></div>
+      <Conversational />
+    </div>
+    <div class="bg-[url('/img/background.webp')] bg-cover pb-12">
+      <div class="w-[300px] h-[1px] bg-[#6A8AF0] m-auto mt-4 mb-4"></div>
+      <Easy />
+      <div class="w-[300px] h-[1px] bg-[#6A8AF0] m-auto mt-4 mb-4"></div>
+      <Technology />
+      <Case />
+      <div class="w-[300px] h-[1px] bg-[#6A8AF0] m-auto mt-4 mb-4"></div>
+      <Feature />
+      <div class="w-[300px] h-[1px] bg-[#6A8AF0] m-auto mt-4 mb-4"></div>
+      <Product />
+      <div class="w-[300px] h-[1px] bg-[#6A8AF0] m-auto mt-4 mb-8"></div>
+      <Team />
+      <div class="w-[300px] h-[1px] bg-[#6A8AF0] m-auto mt-4 mb-6"></div>
+      <Investors />
+      <div class="w-[300px] h-[1px] bg-[#6A8AF0] m-auto mt-4"></div>
+    </div>
+    <Footer />
+  </body>
+</html>
